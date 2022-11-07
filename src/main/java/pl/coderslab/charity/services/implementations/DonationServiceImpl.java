@@ -13,4 +13,13 @@ public class DonationServiceImpl implements DonationService {
         this.donationRepository = donationRepository;
     }
 
+    @Override
+    public Long giveDonationNumber() {
+        return donationRepository.count();
+    }
+
+    @Override
+    public Long giveDonationQuantity() {
+        return donationRepository.getDonationQuantity().orElse(0L);
+    }
 }
