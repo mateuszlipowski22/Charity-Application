@@ -73,31 +73,35 @@
         <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.
             Możesz sprawdzić czym się zajmują.</p>
 
+
         <ul class="help--slides-items">
-            <li>
-                <div class="col">
-                    <div class="title">Fundacja "Dbam o Zdrowie"</div>
-                    <div class="subtitle">Cel i misja: Pomoc dzieciom z ubogich rodzin.</div>
-                </div>
+            <c:forEach var="institution" items="${institiutions}" varStatus="loop">
 
-                <div class="col">
-                    <div class="title">Fundacja "A kogo"</div>
-                    <div class="subtitle">Cel i misja: Pomoc wybudzaniu dzieci ze śpiączki.</div>
-                </div>
-            </li>
+                <c:if test="${loop.count%2!=0}">
+                    <li>
+                        <div class="col">
+                            <div class="title">${institution.name}</div>
+                            <div class="subtitle">${institution.description}</div>
+                        </div>
+                </c:if>
 
-            <li>
-                <div class="col">
-                    <div class="title">Fundacja “Dla dzieci"</div>
-                    <div class="subtitle">Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji życiowej.</div>
-                </div>
-                <div class="col">
-                    <div class="title">Fundacja “Bez domu”</div>
-                    <div class="subtitle">Cel i misja: Pomoc dla osób nie posiadających miejsca zamieszkania</div>
-                </div>
+                <c:if test="${loop.count%2==0}">
+                        <div class="col">
+                            <div class="title">${institution.name}</div>
+                            <div class="subtitle">${institution.description}</div>
+                        </div>
+                    </li>
+                </c:if>
 
-            </li>
+            </c:forEach>
 
+            <c:if test="${institiutions.size() %2 != 0}">
+                        <div class="col">
+                            <div class="title"> </div>
+                            <div class="subtitle"> </div>
+                        </div>
+                    </li>
+            </c:if>
         </ul>
     </div>
 
