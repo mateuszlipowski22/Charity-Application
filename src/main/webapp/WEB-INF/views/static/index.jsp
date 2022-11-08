@@ -80,15 +80,15 @@
                 <c:if test="${loop.count%2!=0}">
                     <li>
                         <div class="col">
-                            <div class="title">${institution.name}</div>
-                            <div class="subtitle">${institution.description}</div>
+                            <div class="title">Fundacja "${institution.name}"</div>
+                            <div class="subtitle">Cel i misja: ${institution.description}</div>
                         </div>
                 </c:if>
 
                 <c:if test="${loop.count%2==0}">
                         <div class="col">
-                            <div class="title">${institution.name}</div>
-                            <div class="subtitle">${institution.description}</div>
+                            <div class="title">Fundacja "${institution.name}"</div>
+                            <div class="subtitle">Cel i misja:${institution.description}</div>
                         </div>
                     </li>
                 </c:if>
