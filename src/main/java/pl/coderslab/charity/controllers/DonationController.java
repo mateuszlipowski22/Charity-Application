@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.charity.dto.DonationDTO;
 import pl.coderslab.charity.models.Donation;
 import pl.coderslab.charity.services.interfaces.CategoryService;
 import pl.coderslab.charity.services.interfaces.DonationService;
@@ -24,36 +25,24 @@ public class DonationController {
     }
 
     @ModelAttribute
-    public void addInstitutionList(Model model) {
-        model.addAttribute("institutions", institutionService.findAll());
+    public void addInstitutionDTOList(Model model) {
+        model.addAttribute("institutionsDTO", institutionService.findAllDTO());
     }
 
     @ModelAttribute
-    public void addCategoryList(Model model) {
-        model.addAttribute("categories", categoryService.findAllCategories());
+    public void addCategoryDTOList(Model model) {
+        model.addAttribute("categoriesDTO", categoryService.findAllCategoriesDTO());
     }
 
     @RequestMapping({"/user/donation/add"})
     public String showNewDonationForm(Model model){
-        model.addAttribute("donation", new Donation());
+        model.addAttribute("donationDTO", new DonationDTO());
         return "user/donation/form";
     }
 
     @PostMapping({"/user/donation/add"})
-    public String processNewDonationForm(Model model, Donation donation){
-        Donation donationToSave = Donation.builder()
-                .categories(donation.getCategories())
-                .quantity(donation.getQuantity())
-                .institution(donation.getInstitution())
-                .city(donation.getCity())
-                .street(donation.getStreet())
-                .city(donation.getCity())
-                .zipCode(donation.getZipCode())
-                .phone(donation.getPhone())
-                .pickUpDate(donation.getPickUpDate())
-                .pickUpTime(donation.getPickUpTime())
-                .pickUpComment(donation.getPickUpComment())
-                .build();
+    public String processNewDonationForm(Model model, DonationDTO donationDTO){
+        Donation donationToSave = donationService.convertDonationDTOToDonation(donationDTO);
         donationService.saveDonation(donationToSave);
         return "user/donation/form-confirmation";
     }

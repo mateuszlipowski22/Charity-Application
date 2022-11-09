@@ -85,27 +85,27 @@
 
 
         <ul class="help--slides-items">
-            <c:forEach var="institution" items="${institiutions}" varStatus="loop">
+            <c:forEach var="institutionDTO" items="${institutionsDTO}" varStatus="loop">
 
                 <c:if test="${loop.count%2!=0}">
                     <li>
                         <div class="col">
-                            <div class="title">Fundacja "${institution.name}"</div>
-                            <div class="subtitle">Cel i misja: ${institution.description}</div>
+                            <div class="title">Fundacja "${institutionDTO.name}"</div>
+                            <div class="subtitle">Cel i misja: ${institutionDTO.description}</div>
                         </div>
                 </c:if>
 
                 <c:if test="${loop.count%2==0}">
                         <div class="col">
-                            <div class="title">Fundacja "${institution.name}"</div>
-                            <div class="subtitle">Cel i misja:${institution.description}</div>
+                            <div class="title">Fundacja "${institutionDTO.name}"</div>
+                            <div class="subtitle">Cel i misja:${institutionDTO.description}</div>
                         </div>
                     </li>
                 </c:if>
 
             </c:forEach>
 
-            <c:if test="${institiutions.size() %2 != 0}">
+            <c:if test="${institutionDTO.size() %2 != 0}">
                         <div class="col">
                             <div class="title"> </div>
                             <div class="subtitle"> </div>

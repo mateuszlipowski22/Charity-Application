@@ -57,18 +57,18 @@
       <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form:form modelAttribute="donation" method="post" action="/user/donation/add">
+        <form:form modelAttribute="donationDTO" method="post" action="/user/donation/add">
 <%--        <form action="form-confirmation.html" method="post">--%>
           <!-- STEP 1: class .active is switching steps -->
           <div data-step="1" class="active">
             <h3>Zaznacz co chcesz oddać:</h3>
 
-            <c:forEach var="category" items="${categories}" varStatus="loop">
+            <c:forEach var="categoryDTO" items="${categoriesDTO}" varStatus="loop">
               <div class="form-group form-group--checkbox">
                 <label>
-                  <input type="checkbox" name="categories" value="${category.id}" id="category"/>
+                  <input type="checkbox" name="categoriesDTO" value="${categoryDTO.id}" id="category"/>
                   <span class="checkbox"></span>
-                  <span class="description">${category.name}</span>
+                  <span class="description">${categoryDTO.name}</span>
                 </label>
               </div>
             </c:forEach>
@@ -101,17 +101,17 @@
           <div data-step="3">
             <h3>Wybierz organizacje, której chcesz pomóc:</h3>
 
-            <c:forEach var="institution" items="${institutions}" varStatus="loop">
+            <c:forEach var="institutionDTO" items="${institutionsDTO}" varStatus="loop">
             <div class="form-group form-group--checkbox">
               <label>
-                <input type="radio" name="institution" value="${institution.id}" />
+                <input type="radio" name="institutionDTO" value="${institutionDTO.id}" />
                 <span class="checkbox radio"></span>
                 <span class="description">
                   <div class="title">
-                    Fundacja: "${institution.name}"
+                    Fundacja: "${institutionDTO.name}"
                   </div>
                   <div class="subtitle">
-                      Cel i misja: ${institution.description}
+                      Cel i misja: ${institutionDTO.description}
                   </div>
                 </span>
               </label>
@@ -194,14 +194,14 @@
                 <ul>
                   <li>
                     <span class="icon icon-bag"></span>
-                    <span class="summary--text">
+                    <span class="summary--text" id="summary-quantity">
                       4 worki ubrań w dobrym stanie dla dzieci
                     </span>
                   </li>
 
                   <li>
                     <span class="icon icon-hand"></span>
-                    <span class="summary--text">
+                    <span class="summary--text" id="summary-institiution>
                       Dla fundacji "Mam marzenie" w Warszawie
                     </span>
                   </li>
@@ -212,19 +212,19 @@
                 <div class="form-section--column">
                   <h4>Adres odbioru:</h4>
                   <ul>
-                    <li>Prosta 51</li>
-                    <li>Warszawa</li>
-                    <li>99-098</li>
-                    <li>123 456 789</li>
+                    <li id="summary-street">Prosta 51</li>
+                    <li id="summary-city">Warszawa</li>
+                    <li id="summary-zipCode">99-098</li>
+                    <li id="summary-phone">123 456 789</li>
                   </ul>
                 </div>
 
                 <div class="form-section--column">
                   <h4>Termin odbioru:</h4>
                   <ul>
-                    <li>13/12/2018</li>
-                    <li>15:40</li>
-                    <li>Brak uwag</li>
+                    <li id="summary-pickUpDate">13/12/2018</li>
+                    <li id="summary-pickUpTime">15:40</li>
+                    <li id="summary-pickUpComment">Brak uwag</li>
                   </ul>
                 </div>
               </div>
