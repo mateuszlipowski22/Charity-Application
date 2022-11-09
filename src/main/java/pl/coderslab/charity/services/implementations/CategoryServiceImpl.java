@@ -5,6 +5,8 @@ import pl.coderslab.charity.models.Category;
 import pl.coderslab.charity.repositories.CategoryRepository;
 import pl.coderslab.charity.services.interfaces.CategoryService;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -18,4 +20,11 @@ public class CategoryServiceImpl implements CategoryService {
     public void saveCategory(Category category) {
         categoryRepository.save(category);
     }
+
+    @Override
+    public List<Category> findAllCategories() {
+        return categoryRepository.findAll();
+    }
+
+
 }

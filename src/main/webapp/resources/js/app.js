@@ -163,7 +163,20 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$stepInstructions[0].parentElement.parentElement.hidden = this.currentStep >= 5;
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
+
       // TODO: get data from inputs and show them in summary
+
+      const spanSummary=document.querySelectorAll(".summary--text")
+
+      spanSummary[0].innerHTML=document.querySelector("#quantity").value + " worków"
+      const selectedCheckbox = document.querySelectorAll("#category:checked")
+
+      for (let i = 0; i <= selectedCheckbox.length-1; i++) {
+        spanSummary[0].innerHTML=spanSummary[0].innerHTML+ " "+ selectedCheckbox[i].nextElementSibling.nextElementSibling.innerText
+      }
+
+      spanSummary[1].innerHTML
+
     }
 
   }
@@ -171,4 +184,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if (form !== null) {
     new FormSteps(form);
   }
+
+
+
 });
