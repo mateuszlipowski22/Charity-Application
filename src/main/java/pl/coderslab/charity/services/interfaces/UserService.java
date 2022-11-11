@@ -9,5 +9,10 @@ public interface UserService {
 
     User convertUserDTOToUser(UserDTO userDTO);
 
+    UserDTO convertUserToUserDTO(User user);
+
     User findByEmail(String email);
+
+    User findById(Long id);
+
 }

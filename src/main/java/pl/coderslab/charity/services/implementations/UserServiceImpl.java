@@ -42,7 +42,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDTO convertUserToUserDTO(User user) {
+        return UserDTO.builder()
+                .email(user.getEmail())
+                .name(user.getName())
+                .surname(user.getSurname())
+                .password(user.getPassword())
+                .donations(user.getDonations())
+                .build();
+    }
+
+    @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 }

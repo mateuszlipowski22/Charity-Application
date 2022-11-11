@@ -23,9 +23,15 @@
             <li class="logged-user">
                 Witaj <sec:authentication property="principal.username"/>
                 <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
+                    <li><a href="/user/profile/show">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="#">Wyloguj</a></li>
+                    <li><a href="#" onclick="document.getElementById('myForm').submit();">Wyloguj</a></li>
+
+                    <form action="<c:url value="/logout"/>" method="post" id="myForm">
+                        <a href="#" onclick="document.getElementById('myForm').submit();">Wyloguj</a>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form>
+
                 </ul>
             </li>
         </ul>

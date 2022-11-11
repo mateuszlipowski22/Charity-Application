@@ -174,8 +174,15 @@ document.addEventListener("DOMContentLoaded", function() {
       for (let i = 0; i <= selectedCheckbox.length-1; i++) {
         spanSummary[0].innerHTML=spanSummary[0].innerHTML+ " "+ selectedCheckbox[i].nextElementSibling.nextElementSibling.innerText
       }
+      spanSummary[1].innerHTML=document.querySelector('input[name="institution"]:checked').nextElementSibling.nextElementSibling.firstElementChild.innerText
 
-      spanSummary[1].innerHTML
+      document.querySelector("#summary-street").innerText=document.querySelector("#street").value
+      document.querySelector("#summary-city").innerText=document.querySelector("#city").value
+      document.querySelector("#summary-zipCode").innerText=document.querySelector("#zipCode").value
+      document.querySelector("#summary-phone").innerText=document.querySelector("#phone").value
+      document.querySelector("#summary-pickUpDate").innerText=document.querySelector("#pickUpDate").value
+      document.querySelector("#summary-pickUpTime").innerText=document.querySelector("#pickUpTime").value
+      document.querySelector("#summary-pickUpComment").innerText=document.querySelector("#pickUpComment").value
 
     }
 
