@@ -201,7 +201,7 @@
 
                   <li>
                     <span class="icon icon-hand"></span>
-                    <span class="summary--text" id="summary-institiution>
+                    <span class="summary--text" id="summary-institiution">
                       Dla fundacji "Mam marzenie" w Warszawie
                     </span>
                   </li>

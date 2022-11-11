@@ -164,18 +164,15 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
 
-      // TODO: get data from inputs and show them in summary
+      const quantitySummary=document.querySelector("#summary-quantity")
 
-      const spanSummary=document.querySelectorAll(".summary--text")
-
-      spanSummary[0].innerHTML=document.querySelector("#quantity").value + " worków"
+      quantitySummary.innerHTML=document.querySelector("#quantity").value + " worków"
       const selectedCheckbox = document.querySelectorAll("#category:checked")
 
       for (let i = 0; i <= selectedCheckbox.length-1; i++) {
-        spanSummary[0].innerHTML=spanSummary[0].innerHTML+ " "+ selectedCheckbox[i].nextElementSibling.nextElementSibling.innerText
+        quantitySummary.innerHTML=quantitySummary.innerHTML+ " "+ selectedCheckbox[i].nextElementSibling.nextElementSibling.innerText
       }
-      spanSummary[1].innerHTML=document.querySelector('input[name="institution"]:checked').nextElementSibling.nextElementSibling.firstElementChild.innerText
-
+      document.querySelector("#summary-institiution").innerText=document.querySelector('input[name="institutionDTO"]:checked').nextElementSibling.nextElementSibling.firstElementChild.innerText
       document.querySelector("#summary-street").innerText=document.querySelector("#street").value
       document.querySelector("#summary-city").innerText=document.querySelector("#city").value
       document.querySelector("#summary-zipCode").innerText=document.querySelector("#zipCode").value

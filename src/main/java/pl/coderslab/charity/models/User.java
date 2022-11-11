@@ -24,7 +24,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Donation> donations;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
