@@ -1,5 +1,6 @@
 package pl.coderslab.charity.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,17 +15,12 @@ import pl.coderslab.charity.services.interfaces.DonationService;
 import pl.coderslab.charity.services.interfaces.InstitutionService;
 
 @Controller
+@AllArgsConstructor
 public class DonationController {
 
     private final InstitutionService institutionService;
     private final CategoryService categoryService;
     private final DonationService donationService;
-
-    public DonationController(InstitutionService institutionService, CategoryService categoryService, DonationService donationService) {
-        this.institutionService = institutionService;
-        this.categoryService = categoryService;
-        this.donationService = donationService;
-    }
 
     @ModelAttribute
     public void addInstitutionDTOList(Model model) {

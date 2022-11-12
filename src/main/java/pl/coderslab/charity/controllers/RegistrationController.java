@@ -1,5 +1,6 @@
 package pl.coderslab.charity.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,13 +12,10 @@ import pl.coderslab.charity.services.interfaces.UserService;
 import javax.validation.Valid;
 
 @Controller
+@AllArgsConstructor
 public class RegistrationController {
 
     private final UserService userService;
-
-    public RegistrationController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {

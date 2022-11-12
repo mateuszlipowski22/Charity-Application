@@ -1,5 +1,6 @@
 package pl.coderslab.charity.services.implementations;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.dto.InstitutionDTO;
 import pl.coderslab.charity.models.Institution;
@@ -10,13 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class InstitutionServiceImpl implements InstitutionService {
 
     private final InstitutionRepository institutionRepository;
-
-    public InstitutionServiceImpl(InstitutionRepository institutionRepository) {
-        this.institutionRepository = institutionRepository;
-    }
 
     @Override
     public List<Institution> findAll() {
