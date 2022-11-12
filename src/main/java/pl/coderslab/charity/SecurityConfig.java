@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import pl.coderslab.charity.utility.MySimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -16,7 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .and().formLogin().loginPage("/login").usernameParameter("email").defaultSuccessUrl("/user/profile/show", true)
+                .and().formLogin().loginPage("/login").usernameParameter("email")
+                .successHandler(myAuthenticationSuccessHandler())
+//                .defaultSuccessUrl("/user/profile/show", true)
                 .and().logout().logoutSuccessUrl("/")
                 .permitAll();
     }
@@ -27,6 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new MySimpleUrlAuthenticationSuccessHandler();
+    }
 ////widocznosc plikow js w folderze /resources/js/
 //    @Override
 //    public void configure(WebSecurity web) throws Exception {
