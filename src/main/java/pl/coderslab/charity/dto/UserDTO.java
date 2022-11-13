@@ -22,6 +22,7 @@ public class UserDTO {
     @NotBlank
     private String surname;
 
+    private Boolean enabled;
 
     private String password;
 

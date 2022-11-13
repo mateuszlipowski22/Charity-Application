@@ -70,7 +70,7 @@ public class AdminController {
 
 
     @PostMapping("/delete")
-    public String processToolDelete(Long id) {
+    public String processAdminToDelete(Long id) {
         roleService.deleteRoleByUserID(id);
         userService.deleteUserByID(id);
         return "redirect:/admin/admins/";

@@ -24,4 +24,8 @@ public interface UserService {
 
     void deleteUserByID(Long userID);
 
+    void updateUser(User user);
+
+    void toggleActivity(User user);
+
 }

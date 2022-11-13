@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEnabled(false);
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
@@ -37,6 +38,7 @@ public class UserServiceImpl implements UserService {
                 .id(userDTO.getId())
                 .email(userDTO.getEmail())
                 .name(userDTO.getName())
+                .enabled(userDTO.getEnabled())
                 .surname(userDTO.getSurname())
                 .password(userDTO.getPassword())
                 .build();
@@ -51,6 +53,7 @@ public class UserServiceImpl implements UserService {
                 .surname(user.getSurname())
                 .password(user.getPassword())
                 .donations(user.getDonations())
+                .enabled(user.getEnabled())
                 .build();
     }
 
@@ -72,6 +75,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveAdmin(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEnabled(true);
         Role userRole = roleRepository.findByName("ROLE_ADMIN");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
@@ -80,5 +84,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserByID(Long userID) {
         userRepository.deleteById(userID);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void toggleActivity(User user) {
+        user.setEnabled(!user.getEnabled());
+        updateUser(user);
     }
 }
