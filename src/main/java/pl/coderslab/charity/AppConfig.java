@@ -1,5 +1,6 @@
 package pl.coderslab.charity;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import pl.coderslab.charity.converters.CategoryDTOConverter;
 import pl.coderslab.charity.converters.InstitutionDTOConverter;
 
 @Configuration
+@EnableEncryptableProperties
 @EnableWebMvc
 @ComponentScan(basePackages = "pl.coderslab")
 
