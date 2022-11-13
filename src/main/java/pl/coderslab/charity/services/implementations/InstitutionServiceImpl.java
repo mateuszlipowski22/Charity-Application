@@ -57,4 +57,9 @@ public class InstitutionServiceImpl implements InstitutionService {
     public Institution getInstitutionByID(Long institutionId) {
         return institutionRepository.getById(institutionId);
     }
+
+    @Override
+    public void deleteInstitutionByID(Long institutionId) {
+        institutionRepository.deleteById(institutionId);
+    }
 }

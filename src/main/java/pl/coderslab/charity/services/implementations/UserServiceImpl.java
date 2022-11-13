@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User convertUserDTOToUser(UserDTO userDTO) {
         return User.builder()
+                .id(userDTO.getId())
                 .email(userDTO.getEmail())
                 .name(userDTO.getName())
                 .surname(userDTO.getSurname())
@@ -44,6 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO convertUserToUserDTO(User user) {
         return UserDTO.builder()
+                .id(user.getId())
                 .email(user.getEmail())
                 .name(user.getName())
                 .surname(user.getSurname())
@@ -60,5 +62,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Override
+    public List<User> findAllUsersByRoles(Role role) {
+        return userRepository.findAllByRolesContaining(role);
+    }
+
+    @Override
+    public void saveAdmin(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Role userRole = roleRepository.findByName("ROLE_ADMIN");
+        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUserByID(Long userID) {
+        userRepository.deleteById(userID);
     }
 }

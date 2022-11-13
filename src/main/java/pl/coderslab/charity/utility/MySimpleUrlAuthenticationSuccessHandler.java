@@ -26,7 +26,6 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
                                         HttpServletResponse response,
                                         Authentication authentication)
             throws IOException {
-
         handle(request, response, authentication);
         clearAuthenticationAttributes(request);
     }
@@ -38,7 +37,6 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     ) throws IOException {
 
         String targetUrl = determineTargetUrl(authentication);
-
         if (response.isCommitted()) {
             log.debug(
                     "Response has already been committed. Unable to redirect to "
@@ -62,7 +60,6 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
                 return roleTargetUrlMap.get(authorityName);
             }
         }
-
         throw new IllegalStateException();
     }
 

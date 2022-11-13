@@ -72,8 +72,8 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Akcje:</h6>
-                    <a class="collapse-item" href="buttons.html">Lista</a>
-                    <a class="collapse-item" href="cards.html">Dodaj</a>
+                    <a class="collapse-item" href="/admin/admins/">Lista</a>
+                    <a class="collapse-item" href="/admin/admins/add">Dodaj</a>
                 </div>
             </div>
         </li>
@@ -104,8 +104,8 @@
             <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Akcje:</h6>
-                    <a class="collapse-item" href="buttons.html">Lista</a>
-                    <a class="collapse-item" href="cards.html">Dodaj</a>
+                    <a class="collapse-item" href="/admin/institutions/">Lista</a>
+                    <a class="collapse-item" href="/admin/institutions/add">Dodaj</a>
                 </div>
             </div>
         </li>

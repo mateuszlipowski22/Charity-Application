@@ -1,7 +1,10 @@
 package pl.coderslab.charity.services.interfaces;
 
 import pl.coderslab.charity.dto.UserDTO;
+import pl.coderslab.charity.models.Role;
 import pl.coderslab.charity.models.User;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -14,5 +17,11 @@ public interface UserService {
     User findByEmail(String email);
 
     User findById(Long id);
+
+    List<User> findAllUsersByRoles(Role role);
+
+    void saveAdmin(User user);
+
+    void deleteUserByID(Long userID);
 
 }
