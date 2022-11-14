@@ -15,7 +15,19 @@
     <link rel="stylesheet" href="<c:url value="../../../resources/css/style.css"/>"/>
 </head>
 <body>
+
+<c:if test="${pageContext.request.requestURL=='http://localhost:8080/WEB-INF/views/static/index.jsp'}">
 <header class="header--main-page">
+</c:if>
+
+<c:if test="${pageContext.request.requestURL=='http://localhost:8080/WEB-INF/views/user/donation/form.jsp'}">
+<header class="header--main-page">
+</c:if>
+
+<c:if test="${pageContext.request.requestURL!='http://localhost:8080'}">
+<header class="header">
+</c:if>">
+
     <nav class="container container--70">
 
         <sec:authorize access="isAuthenticated()">
