@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
-public class SpringDataUserDetailsService implements UserDetailsService {
+public class SpringAuthenticationService implements UserDetailsService {
 
     private final UserService userService;
 

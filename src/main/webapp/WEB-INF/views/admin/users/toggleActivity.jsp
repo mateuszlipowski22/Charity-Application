@@ -31,6 +31,7 @@
             <div class="row">
                 <form method="post" action="/admin/users/toggleActivity">
                     <input type="hidden" name="id" value="${userDTO.id}"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="col-sm">
                         <button type="submit" class="btn btn-primary btn-icon-split">Tak</button>
                     </div>
