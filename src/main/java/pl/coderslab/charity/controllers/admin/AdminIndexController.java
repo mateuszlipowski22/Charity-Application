@@ -1,4 +1,4 @@
-package pl.coderslab.charity.controllers;
+package pl.coderslab.charity.controllers.admin;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
