@@ -8,20 +8,20 @@
     </header>
 
     <section class="login-page">
-      <h2>Strona użytkownia ${currentUserDTO.name}</h2>
+      <form:form modelAttribute="userDTO" method="post" action="/user/profile/changePassword">
         <div class="form-group">
-          <h2>Imie: ${currentUserDTO.name}</h2>
+          <h1>Nowe hasło:</h1>
+          <form:password path="password"/>
         </div>
-        <div class="form-group">
-          <h2>Nazwisko: ${currentUserDTO.surname}</h2>
-        </div>
-        <div class="form-group">
-          <h2>Adress email: ${currentUserDTO.email}</h2>
+        <div>
+          <form:hidden path="password"></form:hidden>
         </div>
         <div class="form-group form-group--buttons">
-          <a href="/user/profile/${currentUserDTO.id}/edit" class="btn btn--without-border">Edytuj dane</a>
-          <a href="login.html" class="btn btn--without-border">Moje Zbiórki</a>
+          <input type="hidden" name="id" value="${userDTO.id}"/>
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+          <button class="btn" type="submit">Zmień haslo</button>
         </div>
+      </form:form>
     </section>
 
 <jsp:include page="../../static/footer.jsp"/>

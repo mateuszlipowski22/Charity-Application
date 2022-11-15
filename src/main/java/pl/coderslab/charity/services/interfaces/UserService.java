@@ -28,4 +28,5 @@ public interface UserService {
 
     void toggleActivity(User user);
 
+    void changePassword(User user);
 }

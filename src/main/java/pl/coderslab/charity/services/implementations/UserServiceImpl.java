@@ -8,7 +8,6 @@ import pl.coderslab.charity.models.Role;
 import pl.coderslab.charity.models.User;
 import pl.coderslab.charity.repositories.RoleRepository;
 import pl.coderslab.charity.repositories.UserRepository;
-import pl.coderslab.charity.services.interfaces.RoleService;
 import pl.coderslab.charity.services.interfaces.UserService;
 
 import java.util.Arrays;
@@ -94,6 +93,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void toggleActivity(User user) {
         user.setEnabled(!user.getEnabled());
-        updateUser(user);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void changePassword(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 }
