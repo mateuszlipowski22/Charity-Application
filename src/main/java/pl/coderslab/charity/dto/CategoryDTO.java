@@ -2,8 +2,7 @@ package pl.coderslab.charity.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
 public class CategoryDTO {
 

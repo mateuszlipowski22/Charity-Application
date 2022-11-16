@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.dto.DonationDTO;
 import pl.coderslab.charity.models.Donation;
+import pl.coderslab.charity.models.User;
 import pl.coderslab.charity.repositories.DonationRepository;
 import pl.coderslab.charity.services.interfaces.CategoryService;
 import pl.coderslab.charity.services.interfaces.DonationService;
 import pl.coderslab.charity.services.interfaces.InstitutionService;
+import pl.coderslab.charity.services.interfaces.UserService;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +21,7 @@ public class DonationServiceImpl implements DonationService {
     private final DonationRepository donationRepository;
     private final InstitutionService institutionService;
     private final CategoryService categoryService;
+    private final UserService userService;
 
     @Override
     public Long giveDonationNumber() {
@@ -52,6 +56,70 @@ public class DonationServiceImpl implements DonationService {
                 .pickUpDate(donationDTO.getPickUpDate())
                 .pickUpTime(donationDTO.getPickUpTime())
                 .pickUpComment(donationDTO.getPickUpComment())
+                .createdOn(donationDTO.getCreatedOn())
+                .status(donationDTO.getStatus())
                 .build();
+    }
+
+    @Override
+    public DonationDTO convertDonationToDonationDTO(Donation donation) {
+        return DonationDTO.builder()
+                .categoriesDTO(donation
+                        .getCategories()
+                        .stream()
+                        .map(categoryService::convertCategoryToCategoryDTO)
+                        .collect(Collectors.toList()))
+                .quantity(donation.getQuantity())
+                .institutionDTO(institutionService.convertInstitutionToInstitutionDTO(donation.getInstitution()))
+                .city(donation.getCity())
+                .street(donation.getStreet())
+                .city(donation.getCity())
+                .zipCode(donation.getZipCode())
+                .phone(donation.getPhone())
+                .pickUpDate(donation.getPickUpDate())
+                .pickUpTime(donation.getPickUpTime())
+                .pickUpComment(donation.getPickUpComment())
+                .userDTO(userService.convertUserToUserDTO(donation.getUser()))
+                .createdOn(donation.getCreatedOn())
+                .status(donation.getStatus())
+                .id(donation.getId())
+                .build();
+    }
+
+    @Override
+    public List<Donation> findAllDonationByUserId(Long id) {
+        return donationRepository.findAllByUserId(id);
+    }
+
+    @Override
+    public List<DonationDTO> findAllDonationsDTOByUserId(Long id) {
+        return findAllDonationByUserId(id).stream().map(this::convertDonationToDonationDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public DonationDTO findDonationDTOById(Long id) {
+        return convertDonationToDonationDTO(findDonationById(id));
+    }
+
+    @Override
+    public Donation findDonationById(Long id) {
+        return donationRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Override
+    public List<Donation> findAllDonationByUserIdSorted(Long id) {
+        return donationRepository.findAllByUserIdSortedBy(id);
+    }
+
+    @Override
+    public List<DonationDTO> findAllDonationsDTOByUserIdSorted(Long id) {
+        return findAllDonationByUserIdSorted(id).stream().map(this::convertDonationToDonationDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public Donation convertDonationDTOToDonation(DonationDTO donationDTO, User user) {
+        Donation donationToUpdate = convertDonationDTOToDonation(donationDTO);
+        donationToUpdate.setUser(user);
+        return donationToUpdate;
     }
 }

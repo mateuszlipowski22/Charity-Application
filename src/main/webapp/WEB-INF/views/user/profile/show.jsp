@@ -20,7 +20,7 @@
         </div>
         <div class="form-group form-group--buttons">
           <a href="/user/profile/${currentUserDTO.id}/edit" class="btn btn--without-border">Edytuj dane</a>
-          <a href="login.html" class="btn btn--without-border">Moje Zbiórki</a>
+          <a href="/user/donation/all" class="btn btn--without-border">Moje Zbiórki</a>
         </div>
     </section>
 

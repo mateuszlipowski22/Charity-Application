@@ -5,6 +5,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.dto.DonationDTO;
@@ -16,6 +17,7 @@ import pl.coderslab.charity.services.interfaces.InstitutionService;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/user/donation/")
 public class DonationController {
 
     private final InstitutionService institutionService;
@@ -32,17 +34,30 @@ public class DonationController {
         model.addAttribute("categoriesDTO", categoryService.findAllCategoriesDTO());
     }
 
-    @RequestMapping({"/user/donation/add"})
+    @RequestMapping({"add"})
     public String showNewDonationForm(Model model){
         model.addAttribute("donationDTO", new DonationDTO());
         return "user/donation/form";
     }
 
-    @PostMapping({"/user/donation/add"})
+    @PostMapping({"add"})
     public String processNewDonationForm(Model model, DonationDTO donationDTO, @AuthenticationPrincipal CurrentUser currentUser){
-        Donation donationToSave = donationService.convertDonationDTOToDonation(donationDTO);
-        donationToSave.setUser(currentUser.getUser());
+        Donation donationToSave = donationService.convertDonationDTOToDonation(donationDTO, currentUser.getUser());
         donationService.saveDonation(donationToSave);
         return "user/donation/form-confirmation";
     }
+
+    @RequestMapping({"all"})
+    public String showAllDonationForm(Model model, @AuthenticationPrincipal CurrentUser currentUser){
+        model.addAttribute("donationsDTO", donationService.findAllDonationsDTOByUserIdSorted(currentUser.getUser().getId()));
+        return "user/donation/all";
+    }
+
+    @RequestMapping({ "{id}/show"})
+    public String showAllDonationForm(Model model, @PathVariable Long id){
+        model.addAttribute("donationDTO", donationService.findDonationDTOById(id));
+        return "user/donation/show";
+    }
+
+
 }

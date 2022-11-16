@@ -47,4 +47,13 @@ public class Donation {
     @ManyToOne
     private User user;
 
+    private LocalDateTime createdOn;
+
+    private String status;
+
+    @PrePersist
+    void prePersist() {
+        createdOn = LocalDateTime.now();
+        status = "NIEODEBRANE";
+    }
 }

@@ -4,11 +4,11 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,4 +37,9 @@ public class DonationDTO {
 
     private String pickUpComment;
 
+    private UserDTO userDTO;
+
+    private LocalDateTime createdOn;
+
+    private String status;
 }

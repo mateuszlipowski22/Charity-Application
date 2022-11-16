@@ -36,7 +36,7 @@
                 Witaj <sec:authentication property="principal.username"/>
                 <ul class="dropdown">
                     <li><a href="/user/profile/show">Profil</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
+                    <li><a href="/user/donation/all">Moje zbiórki</a></li>
                     <li><a href="#" onclick="document.getElementById('myForm').submit();">Wyloguj</a></li>
 
                     <form action="<c:url value="/logout"/>" method="post" id="myForm">
