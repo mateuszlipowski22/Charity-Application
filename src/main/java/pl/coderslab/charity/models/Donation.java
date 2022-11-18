@@ -51,6 +51,8 @@ public class Donation {
 
     private String status;
 
+    private LocalDateTime updatedStatusDate = null;
+
     @PrePersist
     void prePersist() {
         createdOn = LocalDateTime.now();

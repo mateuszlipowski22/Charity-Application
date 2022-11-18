@@ -32,4 +32,5 @@ public interface DonationService {
 
     List<DonationDTO> findAllDonationsDTOByUserIdSorted(Long id);
 
+    void changeStatus(Long id, String status);
 }

@@ -42,4 +42,6 @@ public class DonationDTO {
     private LocalDateTime createdOn;
 
     private String status;
+
+    private LocalDateTime updatedStatusDate;
 }

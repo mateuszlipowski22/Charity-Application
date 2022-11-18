@@ -11,6 +11,7 @@ import pl.coderslab.charity.services.interfaces.DonationService;
 import pl.coderslab.charity.services.interfaces.InstitutionService;
 import pl.coderslab.charity.services.interfaces.UserService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,6 +59,7 @@ public class DonationServiceImpl implements DonationService {
                 .pickUpComment(donationDTO.getPickUpComment())
                 .createdOn(donationDTO.getCreatedOn())
                 .status(donationDTO.getStatus())
+                .updatedStatusDate(donationDTO.getUpdatedStatusDate())
                 .build();
     }
 
@@ -82,6 +84,7 @@ public class DonationServiceImpl implements DonationService {
                 .userDTO(userService.convertUserToUserDTO(donation.getUser()))
                 .createdOn(donation.getCreatedOn())
                 .status(donation.getStatus())
+                .updatedStatusDate(donation.getUpdatedStatusDate())
                 .id(donation.getId())
                 .build();
     }
@@ -121,5 +124,15 @@ public class DonationServiceImpl implements DonationService {
         Donation donationToUpdate = convertDonationDTOToDonation(donationDTO);
         donationToUpdate.setUser(user);
         return donationToUpdate;
+    }
+
+    @Override
+    public void changeStatus(Long id, String status) {
+        Donation donationToUpdateStatus = findDonationById(id);
+        if(!donationToUpdateStatus.getStatus().equals(status)){
+            donationToUpdateStatus.setStatus(status);
+            donationToUpdateStatus.setUpdatedStatusDate(LocalDateTime.now());
+            saveDonation(donationToUpdateStatus);
+        }
     }
 }

@@ -15,6 +15,9 @@ import pl.coderslab.charity.services.interfaces.CategoryService;
 import pl.coderslab.charity.services.interfaces.DonationService;
 import pl.coderslab.charity.services.interfaces.InstitutionService;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/user/donation/")
@@ -32,6 +35,11 @@ public class DonationController {
     @ModelAttribute
     public void addCategoryDTOList(Model model) {
         model.addAttribute("categoriesDTO", categoryService.findAllCategoriesDTO());
+    }
+
+    @ModelAttribute
+    public void addStatusList(Model model) {
+        model.addAttribute("status", Arrays.asList("ODEBRANE", "NIEODEBRANE"));
     }
 
     @RequestMapping({"add"})
@@ -59,5 +67,9 @@ public class DonationController {
         return "user/donation/show";
     }
 
-
+    @PostMapping({ "changeStatus"})
+    public String processChangeStatus(Model model, DonationDTO donationDTO, Long id){
+        donationService.changeStatus(id, donationDTO.getStatus());
+        return "redirect:/user/donation/"+id+"/show";
+    }
 }
