@@ -3,6 +3,7 @@ package pl.coderslab.charity.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.services.interfaces.DonationService;
@@ -34,7 +35,7 @@ public class HomeController {
         model.addAttribute("institutionsDTO", institutionService.findAllDTO());
     }
 
-    @RequestMapping({"/", ""})
+    @GetMapping({"/", ""})
     public String homeAction(Model model){
         return "static/index";
     }

@@ -20,7 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and().formLogin().loginPage("/login").usernameParameter("email")
                 .successHandler(LoginAuthenticationSuccessHandler())
-//                .defaultSuccessUrl("/user/profile/show", true)
                 .and().logout().logoutSuccessUrl("/")
                 .permitAll();
     }
