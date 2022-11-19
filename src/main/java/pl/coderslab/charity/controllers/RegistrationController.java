@@ -61,7 +61,7 @@ public class RegistrationController {
             userService.saveUser(activeUser);
             return "static/accountActivated";
         }else {
-            return "static/error";
+            return "static/incorrectToken";
         }
     }
 
