@@ -12,15 +12,19 @@
       <form:form modelAttribute="userDTO" method="post" action="/register">
         <div class="form-group">
           <form:input path="name" placeholder="Imie"/>
+          <form:errors path="name"></form:errors>
         </div>
         <div class="form-group">
           <form:input path="surname" placeholder="Nazwisko"/>
+          <form:errors path="surname"></form:errors>
         </div>
         <div class="form-group">
           <form:input path="email" placeholder="Email"/>
+          <form:errors path="email"></form:errors>
         </div>
         <div class="form-group">
           <form:password path="password" placeholder="Hasło"/>
+          <form:errors path="password"></form:errors>
         </div>
         <div class="form-group form-group--buttons">
           <a href="/login" class="btn btn--without-border">Zaloguj się</a>

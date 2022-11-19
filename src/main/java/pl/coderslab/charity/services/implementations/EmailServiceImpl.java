@@ -1,7 +1,6 @@
 package pl.coderslab.charity.services.implementations;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -23,7 +22,7 @@ public class EmailServiceImpl implements EmailService {
     public void sendSimpleMessage(
       String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("zbyszekkieliszek49@gmail.com");
+        message.setFrom("noreplay@charity.pl");
         message.setTo(to); 
         message.setSubject(subject); 
         message.setText(text);
@@ -40,7 +39,7 @@ public class EmailServiceImpl implements EmailService {
         try {
             helper = new MimeMessageHelper(message, true);
 
-            helper.setFrom("noreply@baeldung.com");
+            helper.setFrom("noreplay@charity.pl");
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(text);

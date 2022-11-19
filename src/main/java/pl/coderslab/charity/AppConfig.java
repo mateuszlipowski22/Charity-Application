@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -45,5 +46,13 @@ public class AppConfig implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
+    }
+
+    @Bean
+    public SimpleMailMessage templateRegistrationMessage() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setText("Cześć, aby aktywować konto kliknij w poniższy link:" +
+                "\nhttp://localhost:8080/accountActivation/%s/%d\n");
+        return message;
     }
 }

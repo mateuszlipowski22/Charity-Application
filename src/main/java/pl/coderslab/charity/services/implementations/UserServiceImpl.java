@@ -13,6 +13,7 @@ import pl.coderslab.charity.services.interfaces.UserService;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -23,12 +24,13 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     @Override
-    public void saveUser(User user) {
+    public User saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(false);
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        return savedUser;
     }
 
     @Override
@@ -100,5 +102,23 @@ public class UserServiceImpl implements UserService {
     public void changePassword(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+    }
+
+    @Override
+    public boolean activationAccount(String token, Long userId) {
+        User userToActivate = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
+
+        if(token.equals(userToActivate.getToken())){
+            userToActivate.setEnabled(true);
+            userRepository.save(userToActivate);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean userWithEmailExist(String email) {
+        return userRepository.existsUserByEmail(email);
     }
 }

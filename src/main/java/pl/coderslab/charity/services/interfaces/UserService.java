@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserService {
 
-    void saveUser(User user);
+    User saveUser(User user);
 
     User convertUserDTOToUser(UserDTO userDTO);
 
@@ -29,4 +29,8 @@ public interface UserService {
     void toggleActivity(User user);
 
     void changePassword(User user);
+
+    boolean activationAccount(String token, Long userId);
+
+    boolean userWithEmailExist(String email);
 }
