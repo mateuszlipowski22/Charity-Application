@@ -47,13 +47,15 @@
                                             <span class="text">Edytuj</span>
                                         </a>
                                     </div>
-                                    <div class="form-group form-group--buttons">
-                                        <a href="/admin/admins/${admin.id}/delete" class="btn btn-primary btn-icon-split">
+                                    <c:if test="${admin.id!=currentUser.user.id}">
+                                        <div class="form-group form-group--buttons">
+                                            <a href="/admin/admins/${admin.id}/delete" class="btn btn-primary btn-icon-split">
                                         <span class="icon text-white-50">
                                         </span>
-                                            <span class="text">Usun</span>
-                                        </a>
-                                    </div>
+                                                <span class="text">Usun</span>
+                                            </a>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </nav>
                         </td>

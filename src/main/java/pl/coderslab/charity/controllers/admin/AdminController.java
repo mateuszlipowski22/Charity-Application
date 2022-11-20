@@ -1,18 +1,21 @@
 package pl.coderslab.charity.controllers.admin;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.dto.InstitutionDTO;
 import pl.coderslab.charity.dto.UserDTO;
+import pl.coderslab.charity.models.CurrentUser;
 import pl.coderslab.charity.models.Institution;
 import pl.coderslab.charity.models.User;
 import pl.coderslab.charity.services.interfaces.RoleService;
 import pl.coderslab.charity.services.interfaces.UserService;
 
 import javax.validation.Valid;
+import java.util.Objects;
 
 @Controller
 @AllArgsConstructor
@@ -23,8 +26,9 @@ public class AdminController {
     private final RoleService roleService;
 
     @GetMapping("/")
-    public String showAllAdmins(Model model){
+    public String showAllAdmins(Model model, @AuthenticationPrincipal CurrentUser currentUser){
         model.addAttribute("adminsDTO", userService.findAllUsersByRoles(roleService.findByName("ROLE_ADMIN")));
+        model.addAttribute("currentUser", currentUser);
         return "admin/admins/all";
     }
 
@@ -70,9 +74,11 @@ public class AdminController {
 
 
     @PostMapping("/delete")
-    public String processAdminToDelete(Long id) {
-        roleService.deleteRoleByUserID(id);
-        userService.deleteUserByID(id);
+    public String processAdminToDelete(Long id, @AuthenticationPrincipal CurrentUser currentUser) {
+        if(!Objects.equals(id, currentUser.getUser().getId())){
+            roleService.deleteRoleByUserID(id);
+            userService.deleteUserByID(id);
+        }
         return "redirect:/admin/admins/";
     }
 }
