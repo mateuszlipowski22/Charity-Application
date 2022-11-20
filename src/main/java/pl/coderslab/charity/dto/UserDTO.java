@@ -25,7 +25,7 @@ public class UserDTO {
 
     private String password;
 
-//    @Email
+    @Email
     private String email;
 
     private List<Donation> donations;

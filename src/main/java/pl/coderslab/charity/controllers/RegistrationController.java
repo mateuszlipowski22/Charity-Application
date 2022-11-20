@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.charity.dto.UserDTO;
 import pl.coderslab.charity.models.User;
 import pl.coderslab.charity.services.interfaces.EmailService;
+import pl.coderslab.charity.services.interfaces.MailMessageTemplateService;
 import pl.coderslab.charity.services.interfaces.UserService;
 
 import javax.validation.Valid;
@@ -24,7 +25,7 @@ public class RegistrationController {
 
     private final UserService userService;
     private final EmailService emailService;
-    private SimpleMailMessage activationMessageTemplate;
+    private final MailMessageTemplateService mailTemplate;
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -46,7 +47,7 @@ public class RegistrationController {
         String token = String.valueOf(UUID.randomUUID());
         userToSave.setToken(token);
         User savedUser = userService.saveUser(userToSave);
-        String text = String.format(activationMessageTemplate.getText(), token, savedUser.getId());
+        String text = String.format(mailTemplate.getTemplate("activation").getText(), token, savedUser.getId());
         emailService.sendSimpleMessage(savedUser.getEmail(), "Aktywacja konta", text);
 
         return "static/index";
@@ -55,10 +56,6 @@ public class RegistrationController {
     @GetMapping("/accountActivation/{token}/{id}")
     public String activateAccount(@PathVariable String token, @PathVariable Long id){
         if(userService.activationAccount(token,id)){
-            User activeUser = userService.findById(id);
-            String newToken = String.valueOf(UUID.randomUUID());
-            activeUser.setToken(newToken);
-            userService.saveUser(activeUser);
             return "static/accountActivated";
         }else {
             return "static/incorrectToken";

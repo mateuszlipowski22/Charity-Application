@@ -10,10 +10,7 @@ import pl.coderslab.charity.repositories.RoleRepository;
 import pl.coderslab.charity.repositories.UserRepository;
 import pl.coderslab.charity.services.interfaces.UserService;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -29,8 +26,7 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(false);
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
-        User savedUser = userRepository.save(user);
-        return savedUser;
+        return userRepository.save(user);
     }
 
     @Override
@@ -110,6 +106,7 @@ public class UserServiceImpl implements UserService {
 
         if(token.equals(userToActivate.getToken())){
             userToActivate.setEnabled(true);
+            userToActivate.setToken(String.valueOf(UUID.randomUUID()));
             userRepository.save(userToActivate);
             return true;
         }

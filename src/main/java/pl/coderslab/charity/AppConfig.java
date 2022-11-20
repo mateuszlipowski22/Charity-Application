@@ -50,9 +50,14 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Bean
     public SimpleMailMessage templateRegistrationMessage() {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setText("Cześć, aby aktywować konto kliknij w poniższy link:" +
-                "\nhttp://localhost:8080/accountActivation/%s/%d\n");
-        return message;
+        return new SimpleMailMessage();
     }
+
+//    @Bean
+//    public SimpleMailMessage templateForgottenPasswordMessage() {
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setText("Cześć, aby zresetować kasło do konta kliknij w poniższy link:" +
+//                "\nhttp://localhost:8080/forgottenPassword/%s/%d\n");
+//        return message;
+//    }
 }
