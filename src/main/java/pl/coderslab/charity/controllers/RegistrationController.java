@@ -34,10 +34,14 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String processRegistration(@Valid UserDTO userDTO, BindingResult result, Model model){
+    public String processRegistration(@Valid UserDTO userDTO, BindingResult result, Model model, String password2){
 
         if(userService.userWithEmailExist(userDTO.getEmail())){
             result.addError(new FieldError("userDTO", "email", "Podany email jest już zajety. Proszę wybrac inny"));
+        }
+
+        if(!userDTO.getPassword().equals(password2)){
+            result.addError(new FieldError("userDTO", "password", "Podane hasła są różne"));
         }
 
         if (result.hasErrors()) {
