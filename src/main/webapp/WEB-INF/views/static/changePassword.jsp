@@ -24,6 +24,7 @@
           <div class="form-group form-group--buttons">
             <input type="hidden" name="id" value="${userDTO.id}"/>
             <form:hidden path="name"></form:hidden>
+            <form:hidden path="email"></form:hidden>
             <form:hidden path="surname"></form:hidden>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <button class="btn" type="submit">Zmień haslo</button>

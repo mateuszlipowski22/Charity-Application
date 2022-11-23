@@ -17,7 +17,8 @@
         <div class="form-group form-group--buttons">
             <form:hidden path="name"></form:hidden>
             <form:hidden path="surname"></form:hidden>
-          <button class="btn" type="submit">Zatwierdź</button>
+            <form:hidden path="password"></form:hidden>
+            <button class="btn" type="submit">Zatwierdź</button>
         </div>
         </form:form>
     </section>

@@ -53,11 +53,4 @@ public class AppConfig implements WebMvcConfigurer {
         return new SimpleMailMessage();
     }
 
-//    @Bean
-//    public SimpleMailMessage templateForgottenPasswordMessage() {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setText("Cześć, aby zresetować kasło do konta kliknij w poniższy link:" +
-//                "\nhttp://localhost:8080/forgottenPassword/%s/%d\n");
-//        return message;
-//    }
 }

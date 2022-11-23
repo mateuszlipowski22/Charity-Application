@@ -31,7 +31,7 @@ public class PasswordController {
 
     @GetMapping("/forgottenPassword")
     public String showForgottenPasswordView(Model model){
-        model.addAttribute("userDTO", UserDTO.builder().name("name").surname("surname").build());
+        model.addAttribute("userDTO", UserDTO.builder().name("name").surname("surname").password("Password12!").build());
         return "static/forgottenPassword";
     }
 
@@ -62,7 +62,7 @@ public class PasswordController {
             String newToken = String.valueOf(UUID.randomUUID());
             userToChangePassword.setToken(newToken);
             userService.saveUser(userToChangePassword);
-            model.addAttribute("userDTO", UserDTO.builder().id(id).name("name").surname("surname").build());
+            model.addAttribute("userDTO", UserDTO.builder().id(id).name("name").surname("surname").password("Password12!").email(userToChangePassword.getEmail()).build());
             return "static/changePassword";
         }else {
             return "static/incorrectToken";
