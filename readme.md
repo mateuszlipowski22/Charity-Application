@@ -3,9 +3,13 @@ Charity donation application with usage of Spring
 Web application for charity donation for particular foundation.
 
 Application written in Spring framework uses following modules:
+
 -MVC
+
 -Security
+
 -JPA
+
 -Mail
 
 Communication with MySQL database by the usage of Hibernate.
